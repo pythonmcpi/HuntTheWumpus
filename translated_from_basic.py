@@ -296,7 +296,7 @@ class Game(object):
 
     def move_wumpus(self) -> None:
         next_pos = self.random_fnc()
-        if next_pos == 4:
+        if not 1 <= next_pos <= 3:
             return
         self.wumpus = self.rooms[self.wumpus].paths[next_pos]
         if self.wumpus == self.player_pos:
@@ -311,7 +311,7 @@ class Game(object):
             self.rooms[rn].near_wumpus = True
 
     def ask_replay(self) -> None:
-        replay = input("Would you like to try again? ")
+        replay = input("Would you like to play again? ")
         return not replay.lower().startswith('n')
 
     def exit(self) -> None:
@@ -331,6 +331,7 @@ def show_instructions() -> None:
     ins = input("Would you like to read the instructions? (y/n) ")
     if ins.lower().startswith('n'):
         return
+    print()
     print("Welcome to \"Hunt The Wumpus\"")
     print("  The Wumpus lives in a cave of 20 rooms. Each room")
     print("has 3 tunnels leading to other rooms. (Look at a")
